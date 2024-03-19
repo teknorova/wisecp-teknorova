@@ -421,7 +421,7 @@ class Teknorova {
 
     public function request($method, $endpoint, $data = []) {
 
-        $url = 'https://api-gateway.bunyam.in/api/' . $endpoint;
+        $url = 'https://api.teknorova.com/api/' . $endpoint;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
