@@ -125,7 +125,7 @@ class Teknorova {
      */
     public function ModifyNameServer($DomainName, $NameServers) {
 
-        $ns_change = $this->request('POST','domain/nameservers/'.$DomainName,[
+        $ns_change = $this->request('POST','domain/nameserver/'.$DomainName,[
             'nameservers'=>$NameServers
         ]);
 
@@ -241,7 +241,7 @@ class Teknorova {
      */
     public function SaveContacts($DomainName, $Contacts) {
 
-        $save_contact = $this->request('put','domain/contact/'.$DomainName,[
+        $save_contact = $this->request('POST','domain/contact/'.$DomainName,[
             'contacts'=>$Contacts
         ]);
 
