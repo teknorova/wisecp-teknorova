@@ -60,7 +60,7 @@ class Teknorova {
          foreach ($check as $name => $value) {
 
                 $available[] = [
-                    "TLD"        => $value["Tld"],
+                    "TLD"        => $value["TLD"],
                     "DomainName" => $value["DomainName"],
                     "Status"     => $value["Status"],
                     "Command"    => $value["Command"],
