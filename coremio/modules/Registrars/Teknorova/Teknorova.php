@@ -101,6 +101,8 @@ class Teknorova {
             $this->error = $check["error"]["Details"];
             return false;
         }
+        
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return true;
     }
@@ -117,10 +119,7 @@ class Teknorova {
         }
         $response = $this->api->CheckAvailability([$sld], $tlds, 1, "create");
 
-        Modules::save_log("Registrars", __CLASS__, "check", [
-            'sld'  => $sld,
-            'tlds' => $tlds,
-        ], $response);
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         $result = [];
         foreach ($response as $domain) {
@@ -222,6 +221,8 @@ class Teknorova {
         $status  = "SUCCESS";
         $message = NULL;
 
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
+
 
         return [
             'status'  => $status,
@@ -257,6 +258,7 @@ class Teknorova {
             $this->error = $handle["error"]["Details"];
             return false;
         }
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return true;
     }
@@ -290,6 +292,9 @@ class Teknorova {
 
         $response = $this->api->Transfer($domain, $tcode, $year);
 
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
+
+
         if ($response["result"] != "OK") {
             $this->error = $response["error"]["Details"];
             return false;
@@ -313,6 +318,7 @@ class Teknorova {
                 'message' => $this->error,
             ];
         }
+
 
         return $returnData;
     }
@@ -372,6 +378,7 @@ class Teknorova {
             $this->error = $modifyDns["error"]["Details"];
             return false;
         }
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return true;
     }
@@ -433,6 +440,7 @@ class Teknorova {
             $this->error = $addCNS["error"]["Details"];
             return false;
         }
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return [
             'ns' => $ns,
@@ -465,6 +473,7 @@ class Teknorova {
                 return false;
             }
         }
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return true;
     }
@@ -491,6 +500,7 @@ class Teknorova {
             $this->error = $delete["error"]["Details"];
             return false;
         }
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return true;
     }
@@ -508,6 +518,7 @@ class Teknorova {
             $this->error = $OrderDetails["error"]["Details"];
             return false;
         }
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return $OrderDetails["data"]["PrivacyProtectionStatus"] ? "active" : "passive";
     }
@@ -532,6 +543,8 @@ class Teknorova {
             $this->error = $modifyContact["error"]["Details"];
             return false;
         }
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
+
         return true;
     }
 
@@ -609,6 +622,7 @@ class Teknorova {
             $this->error = $OrderDetails["error"]["Details"];
             return false;
         }
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return $OrderDetails["data"]["LockStatus"] == "true";
     }
@@ -626,6 +640,9 @@ class Teknorova {
             $this->error = $OrderDetails["error"]["Details"];
             return false;
         }
+
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
+
         return $OrderDetails["data"]["Status"] != "Active";
     }
 
@@ -650,6 +667,8 @@ class Teknorova {
             $this->error = $modify["error"]["Details"];
             return false;
         }
+
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return true;
     }
@@ -676,6 +695,8 @@ class Teknorova {
             return false;
         }
 
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
+
         return true;
     }
 
@@ -685,7 +706,9 @@ class Teknorova {
      * @return bool
      */
     public function purchasePrivacyProtection($params = []) {
-        return $this->modifyPrivacyProtection($params, true);
+        $result =  $this->modifyPrivacyProtection($params, true);
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
+        return $result;
     }
 
     public function getAuthCode($params = []) {
@@ -722,6 +745,8 @@ class Teknorova {
             $return_data["status"] = "active";
         } elseif ($currentstatus == "Expired")
             $return_data["status"] = "expired";
+
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return $return_data;
     }
@@ -764,6 +789,7 @@ class Teknorova {
             $return_data["status"] = "active";
         } elseif ($currentstatus == "Expired")
             $return_data["status"] = "expired";
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
 
         return $return_data;
     }
@@ -853,6 +879,8 @@ class Teknorova {
 
         $result["transferlock"] = $data["LockStatus"] == "true";
 
+        try { Modules::save_log("Registrars", __CLASS__, __FUNCTION__, $this->api->getRequest(), $this->api->getResponse()); }catch(\Exception $e){ }
+
         return $result;
 
     }
@@ -920,25 +948,33 @@ class Teknorova {
             $sld          = $domain_parse["host"];
             $tld          = $domain_parse["tld"];
             $user_id      = (int)$datum["user_id"];
-            if (!$user_id)
-                continue;
+
+            if (!$user_id){
+                 continue;
+            }
+
+
             $info = $this->get_info([
                 'domain' => $domain,
                 'name'   => $sld,
                 'tld'    => $tld,
             ]);
-            if (!$info)
+
+
+            if (!$info){
                 continue;
+            }
+
 
             $user_data = User::getData($user_id, "id,lang", "array");
             $ulang     = $user_data["lang"];
             $locallang = Config::get("general/local");
-            $productID = Models::$init->db->select("id")
-                                          ->from("tldlist")
-                                          ->where("name", "=", $tld);
+            $productID = Models::$init->db->select("id")->from("tldlist")->where("name", "=", $tld);
             $productID = $productID->build() ? $productID->getObject()->id : false;
-            if (!$productID)
+            if (!$productID){
                 continue;
+            }
+
             $productPrice     = Products::get_price("register", "tld", $productID);
             $productPrice_amt = $productPrice["amount"];
             $productPrice_cid = $productPrice["cid"];
@@ -1244,19 +1280,19 @@ class Teknorova {
         return true;
     }
 
-        public function getDNABalance()
-        {
-            $this->set_credentials();
+    public function getDNABalance()
+    {
+        $this->set_credentials();
 
-            $response = $this->api->GetResellerDetails();
+        $response = $this->api->GetResellerDetails();
 
 
-            if($response["result"] != "OK"){
-                $this->error = $response["ErrorCode"]." : ".$response["error"];
-                return false;
-            }
-
-            return $response;
+        if($response["result"] != "OK"){
+            $this->error = $response["ErrorCode"]." : ".$response["error"];
+            return false;
         }
+
+        return $response;
+    }
 
 }

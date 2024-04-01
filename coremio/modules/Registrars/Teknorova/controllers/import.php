@@ -5,14 +5,19 @@ if (!defined("CORE_FOLDER"))
 $lang = $module->lang;
 $data = Filter::POST("data");
 
-if (!$data || !is_array($data))
+if (!$data || !is_array($data)){
     return false;
+}
 
-if (!$module->import_domain($data))
+$import_result = $module->import_domain($data);
+
+if (!$import_result){
     die(Utility::jencode([
         'status'  => "error",
         'message' => $lang["error9"],
     ]));
+}
+
 
 
 echo Utility::jencode([
